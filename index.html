@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html data-ng-app>
+<head>
+	<title>AngularJS hello world</title>
+</head>
+<body ng-controller="CustomerController">
+<br/>
+<h2>Customers</h2>
+Filter: <input type="text" ng-model="customerFilter.name"/>
+<table>
+	<tr>
+		<th ng-click="doSort('name')">Name</th>
+		<th ng-click="doSort('city')">City</th>
+		<th ng-click="doSort('orderTotal')">Order Total</th>
+		<th ng-click="doSort('joined')">Joined</th>
+	</tr>
+	<tr ng-repeat= " cust in customers | filter: customerFilter | orderBy: sortBy: reverse">
+		<td>{{cust.name}}</td>
+		<td>{{cust.city}}</td>
+		<td>{{cust.orderToatal}}</td>
+		<td>{{cust.joined}}</td>
+	</tr>
+</table>
+<script>
+	function CustomerController ($scope) {
+		$scope.sortBy ='name';
+		$scope.reverse= false;
+		$scope.customers = [{joined: '26-8-1992', name: 'Kushagara', city: 'ranchi', orderTotal: '48'},{joined: '6-8-1992', name: 'Kush', city: 'bangalore', orderTotal: '148'}, {joined: '26-12-1992', name: 'Kushagra', city: 'goa', orderTotal: '248'}];
+		$scope.doSort = function (propName) {
+			$scope.sortBy = propName;
+			$scope.reverse = !$scope.reverse
+			
+		} 
+	}
+</script>
+</body>
+</html>
